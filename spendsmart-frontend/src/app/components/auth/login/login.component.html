@@ -1,0 +1,68 @@
+<!-- Login Page — SpendSmart Authentication -->
+<div class="min-vh-100 d-flex align-items-center justify-content-center"
+     style="background: linear-gradient(135deg, #1E293B 0%, #F97316 100%);">
+  <div class="card shadow-lg" style="width: 420px; border-radius: 16px;">
+    <div class="card-body p-5">
+
+      <!-- App Logo and Title -->
+      <div class="text-center mb-4">
+        <h1 class="fw-bold" style="color: #F97316; font-size: 2rem;">SpendSmart 💰</h1>
+        <p class="text-muted">Sign in to your account</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+
+      <!-- Login Form -->
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="you@example.com"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn w-100 btn-primary-brand py-2 fw-semibold"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+          {{ isLoading ? 'Signing in...' : 'Sign In' }}
+        </button>
+      </form>
+
+      <!-- Register Link -->
+      <div class="text-center mt-3">
+        <span class="text-muted">Don't have an account? </span>
+        <a routerLink="/register" style="color: #F97316;" class="fw-semibold">Create one</a>
+      </div>
+    </div>
+  </div>
+</div>

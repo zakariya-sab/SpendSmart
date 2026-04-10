@@ -1,0 +1,21 @@
+// SpendSmart Android project settings
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Project name
+rootProject.name = "SpendSmartAndroid"
+
+// Include the app module
+include ':app'

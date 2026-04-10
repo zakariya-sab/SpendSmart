@@ -1,0 +1,148 @@
+/* SpendSmart Global Styles */
+
+/* CSS custom property for the primary orange brand color */
+:root {
+  --primary-color: #F97316;
+  --primary-dark: #EA580C;
+  --primary-light: #FED7AA;
+  --success-color: #22C55E;
+  --warning-color: #F59E0B;
+  --danger-color: #EF4444;
+  --sidebar-width: 250px;
+}
+
+/* Base body styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F8FAFC;
+  color: #1E293B;
+}
+
+/* Primary brand color utility classes */
+.bg-primary-brand {
+  background-color: var(--primary-color) !important;
+}
+
+.text-primary-brand {
+  color: var(--primary-color) !important;
+}
+
+.btn-primary-brand {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary-brand:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+/* Sidebar navigation styles */
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding-top: 60px;
+}
+
+.sidebar .nav-link {
+  color: #94A3B8;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 4px 12px;
+  transition: all 0.2s;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Main content area — offset by sidebar width */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* Dashboard card styles */
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-left: 4px solid var(--primary-color);
+}
+
+/* Grade badge colors for financial health scores */
+.grade-a {
+  background-color: var(--success-color);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade-b {
+  background-color: var(--warning-color);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade-c {
+  background-color: var(--danger-color);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Alert badge for unread notifications */
+.alert-badge {
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Progress bar color coding based on budget usage */
+.progress-low .progress-bar {
+  background-color: var(--success-color);
+}
+
+.progress-medium .progress-bar {
+  background-color: var(--warning-color);
+}
+
+.progress-high .progress-bar {
+  background-color: var(--danger-color);
+}

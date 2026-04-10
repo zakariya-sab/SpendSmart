@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SpendSmart Application Theme Configuration -->
+<resources>
+    <!-- Main application theme extending Material3 with SpendSmart orange brand color -->
+    <style name="Theme.SpendSmart" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color: orange #F97316 -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary color (used for FAB, etc.) -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorSecondaryVariant">@color/primaryDark</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background and surface colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/primaryDark</item>
+    </style>
+
+    <!-- No action bar theme for Login and Register activities -->
+    <style name="Theme.SpendSmart.NoActionBar" parent="Theme.SpendSmart">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

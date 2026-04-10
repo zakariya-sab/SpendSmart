@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SpendSmart Color Resources -->
+<resources>
+    <!-- Primary brand color: orange -->
+    <color name="primary">#F97316</color>
+    <color name="primaryDark">#EA580C</color>
+    <color name="primaryLight">#FED7AA</color>
+
+    <!-- Financial health grade colors -->
+    <color name="grade_a">#22C55E</color>
+    <color name="grade_b">#F59E0B</color>
+    <color name="grade_c">#EF4444</color>
+
+    <!-- Budget progress bar colors (green/orange/red) -->
+    <color name="progress_low">#22C55E</color>
+    <color name="progress_medium">#F59E0B</color>
+    <color name="progress_high">#EF4444</color>
+
+    <!-- Alert unread background tint -->
+    <color name="alert_unread_bg">#FFF7ED</color>
+
+    <!-- Standard colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
+</resources>

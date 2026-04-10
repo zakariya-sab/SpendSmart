@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SpendSmart Android Application Manifest -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Required for making HTTP calls to the Spring Boot backend -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="SpendSmart"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SpendSmart"
+        android:usesCleartextTraffic="true">
+
+        <!-- Login screen — shown when user is not authenticated -->
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <!-- This is the app's entry point -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Registration screen — for new users -->
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+
+        <!-- Main screen with bottom navigation — shown after login -->
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

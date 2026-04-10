@@ -1,0 +1,69 @@
+<!-- SpendSmart App Root — Layout with Sidebar Navigation -->
+
+<!-- Full app layout when user is logged in -->
+<ng-container *ngIf="authService.isLoggedIn(); else authPages">
+  <div class="d-flex">
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar d-flex flex-column">
+      <!-- Logo -->
+      <div class="px-4 py-3" style="margin-top: -40px; margin-bottom: 8px;">
+        <h4 class="fw-bold mb-0" style="color: #F97316;">SpendSmart 💰</h4>
+        <small class="text-muted">Personal Finance Analyzer</small>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav flex-column px-2">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/expenses" routerLinkActive="active">
+            <i class="bi bi-receipt me-2"></i> Expenses
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/budgets" routerLinkActive="active">
+            <i class="bi bi-wallet2 me-2"></i> Budgets
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link position-relative" routerLink="/alerts" routerLinkActive="active">
+            <i class="bi bi-bell me-2"></i> Alerts
+            <span *ngIf="unreadAlertsCount > 0"
+                  class="position-absolute badge rounded-pill bg-danger"
+                  style="top: 8px; right: 12px; font-size: 0.65rem;">
+              {{ unreadAlertsCount }}
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/statistics" routerLinkActive="active">
+            <i class="bi bi-bar-chart-line me-2"></i> Statistics
+          </a>
+        </li>
+      </ul>
+
+      <!-- Logout Button at bottom -->
+      <div class="mt-auto px-3 pb-4">
+        <hr style="border-color: #334155;">
+        <button class="btn btn-outline-danger w-100" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-2"></i> Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content flex-grow-1">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+</ng-container>
+
+<!-- Auth pages (login/register) — no sidebar -->
+<ng-template #authPages>
+  <router-outlet></router-outlet>
+</ng-template>

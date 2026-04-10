@@ -1,0 +1,17 @@
+# SpendSmart ML API Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Flask — lightweight web framework for the prediction API
+Flask==3.0.0
+
+# scikit-learn — provides LinearRegression model for spending prediction
+scikit-learn==1.4.0
+
+# NumPy — numerical array operations used by scikit-learn
+numpy==1.26.2
+
+# pandas — data manipulation (optional, for future CSV/data analysis features)
+pandas==2.1.4
+
+# Werkzeug — WSGI utilities used by Flask
+Werkzeug==3.0.1

@@ -1,0 +1,6 @@
+// SpendSmart Android App — Project-level build configuration
+// Defines build plugins available to all sub-modules
+plugins {
+    id 'com.android.application' version '8.2.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+}

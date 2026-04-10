@@ -1,0 +1,69 @@
+<!-- Registration Page — SpendSmart Account Creation -->
+<div class="min-vh-100 d-flex align-items-center justify-content-center"
+     style="background: linear-gradient(135deg, #1E293B 0%, #F97316 100%);">
+  <div class="card shadow-lg" style="width: 460px; border-radius: 16px;">
+    <div class="card-body p-5">
+
+      <!-- App Logo and Title -->
+      <div class="text-center mb-4">
+        <h1 class="fw-bold" style="color: #F97316; font-size: 2rem;">SpendSmart 💰</h1>
+        <p class="text-muted">Create your free account</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+
+      <!-- Success Alert -->
+      <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+
+      <!-- Registration Form -->
+      <form (ngSubmit)="onRegister()" #regForm="ngForm">
+
+        <!-- Name Row -->
+        <div class="row mb-3">
+          <div class="col-6">
+            <label for="firstName" class="form-label fw-semibold">First Name</label>
+            <input type="text" class="form-control" id="firstName"
+                   placeholder="John" [(ngModel)]="firstName" name="firstName" required />
+          </div>
+          <div class="col-6">
+            <label for="lastName" class="form-label fw-semibold">Last Name</label>
+            <input type="text" class="form-control" id="lastName"
+                   placeholder="Doe" [(ngModel)]="lastName" name="lastName" required />
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email address</label>
+          <input type="email" class="form-control" id="email"
+                 placeholder="you@example.com" [(ngModel)]="email" name="email" required />
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input type="password" class="form-control" id="password"
+                 placeholder="At least 6 characters" [(ngModel)]="password" name="password" required minlength="6" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn w-100 btn-primary-brand py-2 fw-semibold" [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+          {{ isLoading ? 'Creating account...' : 'Create Account' }}
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <div class="text-center mt-3">
+        <span class="text-muted">Already have an account? </span>
+        <a routerLink="/login" style="color: #F97316;" class="fw-semibold">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>

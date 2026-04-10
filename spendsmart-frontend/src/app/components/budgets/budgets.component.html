@@ -1,0 +1,123 @@
+<!-- Budgets Component — Monthly budget management -->
+<div>
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Budgets</h2>
+      <p class="text-muted mb-0">Manage your spending limits</p>
+    </div>
+    <button class="btn btn-primary-brand" (click)="showAddForm = !showAddForm">
+      <i class="bi bi-plus-lg me-1"></i> New Budget
+    </button>
+  </div>
+
+  <!-- Feedback Message -->
+  <div *ngIf="message" class="alert" [class.alert-success]="isSuccess" [class.alert-danger]="!isSuccess">
+    {{ message }}
+  </div>
+
+  <!-- Add Budget Form -->
+  <div class="card mb-4" *ngIf="showAddForm">
+    <div class="card-header fw-semibold">Create New Budget</div>
+    <div class="card-body">
+      <form (ngSubmit)="createBudget()">
+        <div class="row g-3">
+          <!-- Month -->
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Month</label>
+            <input type="month" class="form-control"
+                   [(ngModel)]="newBudget.month" name="month" required />
+          </div>
+          <!-- Category -->
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Category</label>
+            <select class="form-select" [(ngModel)]="newBudget.categoryId" name="categoryId" required>
+              <option [value]="0" disabled>Select category...</option>
+              <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            </select>
+          </div>
+          <!-- Max Amount -->
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Limit (MAD)</label>
+            <input type="number" class="form-control" placeholder="500"
+                   [(ngModel)]="newBudget.maxAmount" name="maxAmount" required min="1" />
+          </div>
+        </div>
+        <div class="mt-3 d-flex gap-2">
+          <button type="submit" class="btn btn-primary-brand">Create Budget</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="showAddForm = false">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Month Filter -->
+  <div class="card">
+    <div class="card-header d-flex align-items-center gap-3">
+      <h5 class="mb-0 fw-semibold">Monthly Budgets</h5>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <label class="form-label mb-0 text-muted">Month:</label>
+        <input type="month" class="form-control" style="width: auto;"
+               [(ngModel)]="selectedMonth" (change)="loadBudgets()" />
+      </div>
+    </div>
+    <div class="card-body">
+
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="text-center py-4">
+        <div class="spinner-border" style="color: #F97316;"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && budgets.length === 0" class="text-center py-5 text-muted">
+        <i class="bi bi-wallet2 fs-1 d-block mb-2"></i>
+        <p>No budgets for {{ selectedMonth }}</p>
+      </div>
+
+      <!-- Budget Cards with Progress Bars -->
+      <div class="row g-3" *ngIf="!isLoading && budgets.length > 0">
+        <div class="col-md-6" *ngFor="let budget of budgets">
+          <div class="p-4 border rounded-3 h-100">
+
+            <!-- Category Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <span class="rounded-circle d-inline-block"
+                      style="width: 14px; height: 14px;"
+                      [style.background-color]="budget.categoryColor"></span>
+                <h6 class="fw-bold mb-0">{{ budget.categoryName }}</h6>
+              </div>
+              <!-- Status badge -->
+              <span class="badge"
+                    [class.bg-success]="(budget.percentageUsed || 0) < 50"
+                    [class.bg-warning]="(budget.percentageUsed || 0) >= 50 && (budget.percentageUsed || 0) < 80"
+                    [class.bg-danger]="(budget.percentageUsed || 0) >= 80">
+                {{ budget.percentageUsed | number:'1.0-0' }}%
+              </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress mb-2" style="height: 10px;"
+                 [class]="getProgressClass(budget.percentageUsed || 0)">
+              <div class="progress-bar" [style.width.%]="budget.percentageUsed"></div>
+            </div>
+
+            <!-- Budget Amounts -->
+            <div class="d-flex justify-content-between text-muted small">
+              <span>Spent: <strong>{{ budget.spentAmount | number:'1.0-0' }} MAD</strong></span>
+              <span>Limit: <strong>{{ budget.maxAmount | number:'1.0-0' }} MAD</strong></span>
+            </div>
+
+            <!-- Remaining Amount -->
+            <div class="mt-2 fw-semibold"
+                 [class.text-success]="(budget.percentageUsed || 0) < 80"
+                 [class.text-danger]="(budget.percentageUsed || 0) >= 80">
+              {{ budget.remainingAmount | number:'1.0-0' }} MAD remaining
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
