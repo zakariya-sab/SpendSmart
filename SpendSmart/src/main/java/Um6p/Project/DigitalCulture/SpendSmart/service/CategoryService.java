@@ -10,24 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Service class handling all category-related business logic.
- * Manages the creation and retrieval of spending categories.
- * Also initializes a default set of categories at application startup.
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryService {
 
-    /** Repository for category database operations */
     private final CategoryRepository categoryRepository;
 
-    /**
-     * Retrieve all available spending categories from the database.
-     *
-     * @return a list of CategoryDTO objects representing all categories
-     */
     public List<CategoryDTO> getAllCategories() {
         return categoryRepository.findAll()
                 .stream()
@@ -35,21 +24,11 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Create a new spending category.
-     * Validates that no category with the same name already exists.
-     *
-     * @param dto the category data containing name, color, and icon
-     * @return the saved category as a CategoryDTO
-     * @throws RuntimeException if a category with the same name already exists
-     */
     public CategoryDTO createCategory(CategoryDTO dto) {
-        // Check if a category with this name already exists to prevent duplicates
         if (categoryRepository.existsByName(dto.getName())) {
             throw new RuntimeException("Category with name '" + dto.getName() + "' already exists");
         }
 
-        // Build and save the new category entity
         Category category = Category.builder()
                 .name(dto.getName())
                 .color(dto.getColor())
@@ -61,17 +40,11 @@ public class CategoryService {
         return mapToDTO(savedCategory);
     }
 
-    /**
-     * Initialize the default set of spending categories if none exist.
-     * Called at application startup via CommandLineRunner.
-     * Creates 6 default categories: Food, Transport, Health, Entertainment, Shopping, Other.
-     */
+    /** Seeds 6 default categories at startup if the table is empty. */
     public void initDefaultCategories() {
-        // Only create defaults if the categories table is empty
         if (categoryRepository.count() == 0) {
             log.info("Initializing default categories...");
 
-            // Define default categories with their names, colors, and icons
             Object[][] defaults = {
                 {"Food",          "#FF6B6B", "restaurant"},
                 {"Transport",     "#4ECDC4", "directions_car"},
@@ -81,7 +54,6 @@ public class CategoryService {
                 {"Other",         "#DDA0DD", "category"}
             };
 
-            // Create and save each default category
             for (Object[] categoryData : defaults) {
                 Category category = Category.builder()
                         .name((String) categoryData[0])
@@ -89,17 +61,11 @@ public class CategoryService {
                         .icon((String) categoryData[2])
                         .build();
                 categoryRepository.save(category);
-                log.info("Created default category: {}", categoryData[0]);
             }
+            log.info("Default categories created.");
         }
     }
 
-    /**
-     * Convert a Category entity to a CategoryDTO for API responses.
-     *
-     * @param category the Category entity to convert
-     * @return a CategoryDTO with the entity's data
-     */
     public CategoryDTO mapToDTO(Category category) {
         return CategoryDTO.builder()
                 .id(category.getId())

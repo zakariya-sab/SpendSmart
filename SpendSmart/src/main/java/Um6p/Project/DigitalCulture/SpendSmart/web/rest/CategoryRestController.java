@@ -12,12 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * REST controller for category management operations.
- * GET /api/categories is accessible to all authenticated users.
- * POST /api/categories is restricted to ADMIN users only.
- * Base path: /api/categories
- */
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin(origins = "*")
@@ -25,32 +19,14 @@ import java.util.List;
 @Slf4j
 public class CategoryRestController {
 
-    /** Service containing category business logic */
     private final CategoryService categoryService;
 
-    /**
-     * Get all available spending categories.
-     * Available to all authenticated users — used to populate dropdowns in the UI.
-     *
-     * GET /api/categories
-     *
-     * @return 200 with a list of all CategoryDTOs
-     */
     @GetMapping
     public ResponseEntity<ApiResponseDTO<List<CategoryDTO>>> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(ApiResponseDTO.success("Categories retrieved successfully", categories));
     }
 
-    /**
-     * Create a new spending category.
-     * Restricted to ADMIN users only (enforced by @PreAuthorize annotation).
-     *
-     * POST /api/categories
-     *
-     * @param categoryDTO the category data (name, color, icon)
-     * @return 200 with the created CategoryDTO, or 400 if name already exists
-     */
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDTO<CategoryDTO>> createCategory(

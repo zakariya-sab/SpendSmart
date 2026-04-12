@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-/**
- * REST controller for Machine Learning spending prediction.
- * All endpoints require a valid JWT token (protected by Spring Security).
- * Proxies requests to the Python Flask ML API for next month predictions.
- * Base path: /api/ml
- */
 @RestController
 @RequestMapping("/api/ml")
 @CrossOrigin(origins = "*")
@@ -23,19 +17,8 @@ import java.util.Map;
 @Slf4j
 public class MLRestController {
 
-    /** Service that communicates with the Python Flask ML API */
     private final MLService mlService;
 
-    /**
-     * Get the predicted spending amount for next month.
-     * Uses the user's last 3 months of expense history to generate the prediction.
-     * Returns a fallback response if the Flask ML API is unavailable.
-     *
-     * GET /api/ml/predict
-     *
-     * @param authentication the Spring Security authentication object
-     * @return 200 with prediction data: { predicted_amount: double, trend: String }
-     */
     @GetMapping("/predict")
     public ResponseEntity<ApiResponseDTO<Map<String, Object>>> predictNextMonth(Authentication authentication) {
         String userEmail = authentication.getName();
