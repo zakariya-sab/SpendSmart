@@ -21,7 +21,7 @@ public class FinancialHealthScore {
     private double value;
     private String grade;
 
-    /** Month in "YYYY-MM" format, e.g. "2026-04" */
+    @Column(name = "score_month")
     private String month;
 
     @Temporal(TemporalType.TIMESTAMP)

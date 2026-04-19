@@ -21,7 +21,7 @@ public class Budget {
     private double maxAmount;
     private double spentAmount;
 
-    /** Month in "YYYY-MM" format, e.g. "2026-04" */
+    @Column(name = "budget_month")
     private String month;
 
     @ManyToOne(fetch = FetchType.LAZY)
