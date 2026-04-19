@@ -40,8 +40,11 @@ export class ExpensesComponent implements OnInit {
   /** Success/error message to display */
   message = '';
 
-  /** Whether the last operation was successful */
   isSuccess = true;
+
+  get totalAmount(): number {
+    return this.expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+  }
 
   /** Form model for adding a new expense */
   newExpense: Expense = {
