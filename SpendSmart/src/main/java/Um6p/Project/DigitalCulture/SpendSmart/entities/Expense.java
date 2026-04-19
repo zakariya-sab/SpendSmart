@@ -19,6 +19,7 @@ public class Expense {
 
     private double amount;
 
+    @Column(name = "expense_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

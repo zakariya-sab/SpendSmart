@@ -28,8 +28,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "user_role")
     private String role;
 
+    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

@@ -18,12 +18,15 @@ public class FinancialHealthScore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "score_value")
     private double value;
+
     private String grade;
 
     @Column(name = "score_month")
     private String month;
 
+    @Column(name = "score_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

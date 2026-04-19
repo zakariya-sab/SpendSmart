@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 
-/** type is "WARNING" (≥80% budget used) or "EXCEEDED" (≥100% budget used) */
+/** alert_type is "WARNING" (≥80% budget used) or "EXCEEDED" (≥100% budget used) */
 @Entity
 @Table(name = "alerts")
 @Data
@@ -20,10 +20,14 @@ public class Alert {
 
     private String message;
 
+    @Column(name = "alert_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Column(name = "is_read")
     private boolean isRead;
+
+    @Column(name = "alert_type")
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
